@@ -1,0 +1,35 @@
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5.5rem;
+    width: 5.5rem;
+    background: #eef0f0;
+    border-radius: 50%;
+}
+
+.default-profile-icon {
+    font-size: 3rem;
+}
+
+.picture-icon {
+    font-size: 7.5rem;
+}
+
+.upload-container {
+    height: 50vh;
+}
+
+.btn-post {
+    font-size: 2rem !important;
+}
+
+.uploaded-img {
+    width: 100%;
+    height: auto;
+}
+
+.caption {  
+    resize: none;
+}

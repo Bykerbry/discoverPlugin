@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../../styles/helper.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+
+    <script src="../../../scripts/buildfire.js"></script>
+    <script src="js/authManager.js"></script>
+    <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
+    <script src="assets/vendors/bootstrap.min.js"></script>
+    <script src="assets/vendors/luxon.min.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/index.js"></script>
+
+
+  <!--
+    NOTE:
+    1. You can reference the file in SDK via relative path
+    2. The Control and Widget Should NOT share resources. Only the Widget folder will make it to the device
+    3. You may include any JS framework you want with your Widget and Control folders. However, keep in mind
+        to keep you plugin as light weight as possible for performance and transport reasons
+  -->
+
+  <!-- You can load helper.css to use our helper classes.
+  -->
+
+  <!-- JS -->
+
+
+  <!--
+   <script src="../../../../scripts/angular/angular.min.js"></script>
+   <script src="../../../../scripts/angular/ui-bootstrap.min.js"></script>
+   -->
+   
+</head>
+<body>
+
+  <!-- View Post Modal -->
+  <div class="modal fade" id="view-post-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /View Post Modal -->
+
+  <div class="no-posts text-center pt-5 d-none">
+    <span> Looks like there are no posts yet. </span>  
+  </div>
+  <div class="" id="main-feed-container">
+    <div class="row">
+      <div class="col-xs-6 pr-0" id="col-left"></div>
+      <div class="col-xs-6 pl-0" id="col-right"></div>
+    </div>
+  </div>
+  <a class="bg-primary text-light btn-add-post" href="CreatePost.html"><span class="text-light light-color-hover bg-light">+</span></a>
+</body>
+</html>

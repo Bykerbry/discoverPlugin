@@ -1,0 +1,22 @@
+{
+  "author": "BuildFire",
+  "pluginName": "Discover",
+  "pluginDescription": "Social plugin for sharing photos",
+  "supportEmail": "devSupport@buildfire.com",
+  "control": {
+    "content": {
+      "enabled": true
+    },
+    "design":{
+      "enabled": false
+    },
+    "settings": {
+      "enabled": false
+    }
+  },
+  "widget": {
+
+  },
+  "features": [],
+  "languages": ["en"]
+}
