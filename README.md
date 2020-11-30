@@ -1,2 +1,2 @@
-# defaultPluginTemplate
-Default simple plugin template 
+# discoverPlugin
+Social plugin for sharing photos 
