@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../../../../styles/helper.css" rel="stylesheet">
   <link rel="stylesheet" href="css/global.css"/>
-  <link rel="stylesheet" href="css/index.css"/>
+  <link rel="stylesheet" href="css/profilePage.css"/>
 
   <script src="../../../scripts/buildfire.js"></script>
   <script src="js/authManager.js"></script>
@@ -13,7 +13,7 @@
   <script src="assets/vendors/luxon.min.js"></script>
   <script src="js/formatTime.js"></script>
   <script src="js/global.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/profilePage.js"></script>
 
 
   <!--
@@ -44,7 +44,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title"><a class="username" href="profilePage.html"></a> <br> <small class="post-creation-time text-muted">Yesterday 2:55PM</small></h4>
+          <h4 class="modal-title"><span class="username"></span> <br> <small class="post-creation-time text-muted">Yesterday 2:55PM</small></h4>
         </div>
         <div class="modal-body">
         </div>
@@ -56,6 +56,25 @@
     </div>
   </div>
   <!-- /View Post Modal -->
+
+  <div class="d-flex justify-between user-info-container align-center pt-3 pr-5 pl-5">
+    <div class="posts-container text-center">
+      <h2 class="post-count">2</h2>
+      <p>Posts</p>
+    </div>
+    <div class="profile-picture">
+      <i class="glyphicon glyphicon-user"></i>
+    </div>
+    <div class="like-continer text-center">
+      <h2 class="like-count">14</h2>
+      <p>Likes</p>
+    </div>
+  </div>
+  <p class="text-center">Username</p>
+  
+  <div class="post-container">
+
+  </div>
 
   <div class="no-posts text-center pt-5 d-none">
     <span> Looks like there are no posts yet. </span>  

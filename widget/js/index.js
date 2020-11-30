@@ -1,8 +1,6 @@
 $(function() {
     let user;
     const postTag = 'posts'
-    const {DateTime : dt} = luxon
-    const aDate = dt.local(2017, 5, 15, 8, 30);    
 
     authManager.getCurrentUser((err, userInfo) => {
         if (err) {
@@ -43,8 +41,10 @@ $(function() {
             if (error) {
                 return console.log('Error: ' , error)
             }
-            const { post } = postInfo.data
-            $modal.find('.modal-title').text(postInfo.data.user.name)
+            const { post, user } = postInfo.data
+            //set ID of the post's creator into the <a> tag to retrieve on click
+            $modal.find('.username').text(user.name).data('userId', user.id)
+            $modal.find('.post-creation-time').text(formatTime(post.createdOn))
             $modalBody.html(`
                 <img src="${post.src}">
                 <p class="mt-3">${post.caption}</p>
@@ -68,6 +68,16 @@ $(function() {
             $modalBody.find('.interaction-container').data('postId', postId)
             post.comments.forEach(comment => displayComment(comment))
             
+        })
+    })
+
+    $('#view-post-modal').on('click', '.username', function(){
+        const userId = $(this).data('userId')
+        buildfire.localStorage.setItem('userId', userId, function(error, result){
+            if (error){
+                return console.log('There was an error setting to localStorage: ', error)
+            }
+            buildfire.history.push('Profile Page')
         })
     })
 
@@ -129,8 +139,6 @@ $(function() {
                 displayComment(commentInfo)
             })
         })
-
-        // Display Comments....
     })
     
     $('#view-post-modal').on("input", '.autoExpand',function () {
@@ -180,23 +188,24 @@ const determineColumn = () => {
     return rightHeight < leftHeight ? 'right' : 'left'
 }
 
-const displayComment = (comment) => {
+const displayComment = (commentInfo) => {
+    const { comment } = commentInfo
     $('#view-post-modal .modal-body').find('.comments-container').prepend(`
     <div class='comment-container mt-3'>
-        <div class='default-background border-radius-six border-radius-bottom-none p-2'>
-            ${comment.user.name}
+        <div class='default-background border-radius-six border-radius-bottom-none p-2 d-flex justify-between'>
+            <span>${commentInfo.user.name}</span> <small class='text-muted text-small'>${formatTime(comment.createdOn)}</small>
         </div>
         <div class='border-default border-radius-six border-radius-top-none'>
             <div class="p-2">
-                ${comment.comment.comment}
+                ${comment.comment}
                 <div class="pt-2">
                     <button class="btn btn-white pt-0 pl-0 pb-0 pr-2 btn-comment-like"><i class="glyphicon glyphicon-heart text-danger"></i></button>
-                    <span class="num-comment-likes">${comment.comment.likes.length}</span>
+                    <span class="num-comment-likes">${comment.likes.length}</span>
                 </div>
             </div>
         </div>
     </div>
     `)
     
-    $('.comments-container .comment-container').first().data('commentCreatedOn', comment.comment.createdOn)
+    $('.comments-container .comment-container').first().data('commentCreatedOn', comment.createdOn)
 }
