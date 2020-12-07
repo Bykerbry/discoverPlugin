@@ -13,23 +13,26 @@ $(function() {
     authManager.enforceLogin()
 
     // Display posts on page load
-    buildfire.publicData.search({}, postTag, (error, posts) => {
-        if (error) {
-           return console.log('Error: ', error)
-        } 
-        if (posts.length > 0) {
-            posts.forEach(post => {
-                console.log(post)
-                const column = determineColumn()
-                const img = $('<img>')
-                img.attr('src', post.data.post.src)
-                img.data('postId', post.id)
-                img.appendTo(`#col-${column}`)
-            })
-        } else {
-            $('.no-posts').removeClass('d-none')
-        }
-    })
+    displayPosts({})
+    // buildfire.publicData.search({}, postTag, (error, posts) => {
+    //     if (error) {
+    //        return console.log('Error: ', error)
+    //     } 
+    //     if (posts.length > 0) {
+    //         posts.forEach((post, i) => {
+    //             console.log(post)
+    //             const img = $('<img>')
+    //             img.attr('src', post.data.post.src)
+    //             img.data('postId', post.id)
+    //             $(img).load(function(){
+    //                 const column = determineColumn()
+    //                 $(this).appendTo(`#col-${column}`)
+    //             })
+    //         })
+    //     } else {
+    //         $('.no-posts').removeClass('d-none')
+    //     }
+    // })
 
     //View Post Modal
     $('#main-feed-container').on('click', 'img', function() {
@@ -72,8 +75,11 @@ $(function() {
     })
 
     $('#view-post-modal').on('click', '.username', function(){
-        const userId = $(this).data('userId')
-        buildfire.localStorage.setItem('userId', userId, function(error, result){
+        const selectedUser = JSON.stringify({
+            name: $(this).text(),
+            id: $(this).data('userId')
+        })
+        buildfire.localStorage.setItem('selectedUser', selectedUser, function(error, result){
             if (error){
                 return console.log('There was an error setting to localStorage: ', error)
             }
@@ -182,11 +188,12 @@ $(function() {
     })
 })
 
-const determineColumn = () => {
-    const leftHeight = parseInt($('#col-left').css('height'))
-    const rightHeight = parseInt($('#col-right').css('height'))
-    return rightHeight < leftHeight ? 'right' : 'left'
-}
+// const determineColumn = () => {
+//     const leftHeight = parseInt($('#col-left').innerHeight())
+//     const rightHeight = parseInt($('#col-right').innerHeight())
+//     console.log('Left: ' + leftHeight, 'Right: ' + rightHeight)
+//     return rightHeight < leftHeight ? 'right' : 'left'
+// }
 
 const displayComment = (commentInfo) => {
     const { comment } = commentInfo

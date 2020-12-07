@@ -12,6 +12,7 @@
   <script src="assets/vendors/bootstrap.min.js"></script>
   <script src="assets/vendors/luxon.min.js"></script>
   <script src="js/formatTime.js"></script>
+  <script src="js/displayPosts.js"></script>
   <script src="js/global.js"></script>
   <script src="js/profilePage.js"></script>
 
@@ -59,21 +60,30 @@
 
   <div class="d-flex justify-between user-info-container align-center pt-3 pr-5 pl-5">
     <div class="posts-container text-center">
-      <h2 class="post-count">2</h2>
+      <h2 id="post-count"> &nbsp; </h2>
       <p>Posts</p>
     </div>
     <div class="profile-picture">
       <i class="glyphicon glyphicon-user"></i>
     </div>
     <div class="like-continer text-center">
-      <h2 class="like-count">14</h2>
+      <h2 id="like-count"> &nbsp; </h2>
       <p>Likes</p>
     </div>
   </div>
-  <p class="text-center">Username</p>
-  
-  <div class="post-container">
+  <p class="text-center" id="username"> &nbsp; </p>
 
+  <div class="post-container">
+    <div class="no-posts text-center pt-5 d-none">
+      <span> Looks like there are no posts yet. </span>  
+    </div>
+    <div class="" id="main-feed-container">
+      <div class="row">
+        <div class="col-xs-6 pr-0" id="col-left"></div>
+        <div class="col-xs-6 pl-0" id="col-right"></div>
+      </div>
+    </div>
+  
   </div>
 
   <div class="no-posts text-center pt-5 d-none">

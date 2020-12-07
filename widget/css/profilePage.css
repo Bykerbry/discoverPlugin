@@ -4,3 +4,17 @@
 .glyphicon-user{
     font-size: 5em;
 }
+
+/* Feed */
+img {
+    width: 100%;
+    height: auto;
+}
+
+#col-left img {
+    padding: .5rem .25rem 0 .5rem;
+}
+
+#col-right img {
+    padding: .5rem .5rem 0 .25rem;
+}

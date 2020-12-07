@@ -13,21 +13,34 @@ $(function(){
     })
     authManager.enforceLogin()
     
-    // Need to retrieve ID of selected user (localstorage?)
-    buildfire.localStorage.getItem('userId', function(error, result) {
+    buildfire.localStorage.getItem('selectedUser', function(error, profileOwner) {
         if (error){
             return console.log('There was an error getting userId: ', error)
         }
-        console.log(result)
-        profileUserId = result
-        buildfire.publicData.search({}, postTag, (err, posts)=>{
-            if (err){
-                return console.log('There was an error: ', err)
-            }
-            console.log(posts)
+        profileOwner = JSON.parse(profileOwner)
+        $('#username').text(profileOwner.name)
+        
+        const searchOptions = {
+            filter: {
+                "$json.user.id": profileOwner.id
+            }, 
+            page: 0, 
+            pageSize: 3
+        }
+
+        displayPosts(searchOptions, function(posts){
+            const totalPosts = posts.length
+            let likes = 0
+
+            posts.forEach(post => {
+                likes += post.data.post.likes.length
+            });
+
+            $('#post-count').text(totalPosts)
+            $('#like-count').text(likes)
         })
     
-        buildfire.localStorage.removeItem('userId')
+        buildfire.localStorage.removeItem('selectedUser')
     })
     // Need to search for only the posts created by the selected user (using user ID)
 })
