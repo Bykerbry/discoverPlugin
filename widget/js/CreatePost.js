@@ -1,21 +1,25 @@
 $(function() {
-    let user;
+    let activeUser;
     const postTag = 'posts'
 
     authManager.getCurrentUser((err, userInfo) => {
         if (err) {
             console.log(err)
         } else {
-            console.log('user', userInfo)
-            user = userInfo
-            $(".username").text(user.displayName) 
+            activeUser = userInfo
+            $(".username").text(activeUser.displayName)
+
+            const pic = buildfire.auth.getUserPictureUrl({userId: activeUser._id})
+            $('.profile-picture img').attr('src', pic).load(function(response, status) {
+                if (status === 'error') {
+                    return console.log('There was an error: ', response)
+                }
+                $('.glyphicon-user').addClass('d-none')
+                $(this).removeClass('d-none')
+            })
         }
     })
     authManager.enforceLogin()
-
-    buildfire.history.get({ pluginBreadcrumbsOnly: true }, function(err, result){
-        console.info('Current Plugin Breadcrumbs', result);
-    });
 
     buildfire.navigation.onBackButtonClick = function(){
         buildfire.history.pop()
@@ -55,7 +59,6 @@ $(function() {
     // })
 
     $('.photo-import').on('change', (e) => {
-        console.log(e.target.files[0])
         $('.logo-preview').html('')
 		const reader = new FileReader()
 
@@ -64,8 +67,6 @@ $(function() {
             $('.uploaded-img').attr('src', reader.result)
             $('.upload-container').addClass('d-none')
             $('.upload-preview-container').removeClass('d-none')
-            console.log($('.uploaded-img').attr('src').substring(0,50))
-            // console.log("2", reader.result)
         }
         reader.readAsDataURL(e.target.files[0])
     })
@@ -82,8 +83,8 @@ $(function() {
     $('.btn-confirm-post').on('click', () => {
         const post = {
             user: {
-                id: user._id,
-                name: user.displayName,
+                id: activeUser._id,
+                name: activeUser.displayName,
             },
             post: {
                 src: $('.uploaded-img').attr('src'),

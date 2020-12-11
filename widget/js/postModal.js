@@ -11,7 +11,6 @@ $(function() {
             if (error) {
                 return console.log('Error: ' , error)
             }
-            console.log(postInfo)
             const { post, user } = postInfo.data
             //set ID of the post's creator into the <a> tag to retrieve on click
             if (user.id == activeUser._id) {
@@ -91,7 +90,6 @@ $(function() {
                     likes: []
                 }
             };
-            console.log(commentInfo)
             comments.push(commentInfo)
             buildfire.publicData.update(postId, post.data, postTag, function(error, status){
                 if (error) {
@@ -110,16 +108,14 @@ $(function() {
         const postId = $('.interaction-container').data('postId')
         const $commentContainer = $(this).closest('.comment-container')
         const commentCreatedOn = $commentContainer.data('commentCreatedOn')
-        console.log(commentCreatedOn)
+
         buildfire.publicData.getById(postId, postTag, (error, post) => {
             if (error) {
                 return console.log('Error: ' , error)
             }
             const { comments } = post.data.post
-            console.log(comments)
             const selectedCommentIndex = comments.findIndex(comment => comment.comment.createdOn == commentCreatedOn)
             const selectedComment = comments.find(comment => comment.comment.createdOn == commentCreatedOn)
-            console.log(selectedComment)
             const { likes } = selectedComment.comment
             const action = {}
             likes.map((userId, index) => {
@@ -148,10 +144,8 @@ $(function() {
                 if (err){
                     console.log('Error deleting: ', err)
                 }
-                console.log(status)
                 const pagePosts = $('#main-feed-container').find('img')
                 pagePosts.each((i,post) =>{
-                    console.log(post)
                     if ($(post).data('postId') === postId){
                         return $(post).remove()
                     }
@@ -167,9 +161,6 @@ $(function() {
         const postId = $modal.find('.interaction-container').data('postId')
         const $commentContainer = $(this).parents('.comment-container')
         const commentCreatedOn = $commentContainer.data('commentCreatedOn')
-        buildfire.publicData.search({}, postTag, function(err,results){
-            console.log(results)
-        })
 
         buildfire.publicData.getById(postId, postTag, function(err, post){
             if (err){
@@ -178,14 +169,11 @@ $(function() {
             const { comments } = post.data.post
             const updatedComments = comments.filter(comment => comment.comment.createdOn != commentCreatedOn)
             post.data.post.comments = updatedComments
-            console.log(post)
+            
             buildfire.publicData.update(postId, post.data, postTag, function(err, status){
                 if (err){
                     console.log('There was an error updating the post: ', err)
                 }
-                buildfire.publicData.search({}, postTag, function(err,results){
-                    console.log(results)
-                })
                 $commentContainer.remove()
             })
         })

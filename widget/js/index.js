@@ -5,7 +5,6 @@ $(function() {
         if (err) {
             console.log('Login Error: ', err)
         } else {
-            console.log('User: ', userInfo)
             activeUser = userInfo
         }
     })

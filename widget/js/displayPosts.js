@@ -5,7 +5,6 @@ function displayPosts(searchOptions, cb = function(p){console.log(p)}){
         } 
         if (posts.length > 0) {
             posts.forEach((post, i) => {
-                console.log(post)
                 const img = $('<img>')
                 img.attr('src', post.data.post.src)
                 img.data('postId', post.id)
@@ -24,6 +23,5 @@ function displayPosts(searchOptions, cb = function(p){console.log(p)}){
 function determineColumn() {
     const leftHeight = parseInt($('#col-left').innerHeight())
     const rightHeight = parseInt($('#col-right').innerHeight())
-    console.log('Left: ' + leftHeight, 'Right: ' + rightHeight)
     return rightHeight < leftHeight ? 'right' : 'left'
 }

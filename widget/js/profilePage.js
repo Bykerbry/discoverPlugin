@@ -7,7 +7,6 @@ $(function(){
         if (err) {
             console.log('Login Error: ', err)
         } else {
-            console.log('User: ', userInfo)
             activeUser = userInfo
         }
     })
@@ -29,22 +28,25 @@ $(function(){
 
         // Get profile picture & once loaded, remove default & show img
         const pic = buildfire.auth.getUserPictureUrl({userId: profileOwner.id})
-        $('.profile-picture img').load(pic, function(response, status, xhr){
+        $('.profile-picture img').attr('src', pic).load(function(response, status) {
             if (status === 'error') {
-                console.log($(this)[0])
                 return console.log('There was an error: ', response)
             }
-            // $('.profile-picture img').attr('src', response)
             $('.glyphicon-user').addClass('d-none')
             $(this).removeClass('d-none')
         })
 
+        // const searchOptions = {
+        //     filter: {
+        //         "$json.user.id": profileOwner.id
+        //     }, 
+        //     page: 0, 
+        //     pageSize: 3
+        // }
         const searchOptions = {
             filter: {
                 "$json.user.id": profileOwner.id
-            }, 
-            page: 0, 
-            pageSize: 3
+            }
         }
 
         displayPosts(searchOptions, function(posts){
