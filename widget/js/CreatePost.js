@@ -22,48 +22,37 @@ $(function() {
         location.href = 'index.html'
     }
 
-    buildfire.userData.get((err, data) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log(data)
-        }
-    })
-
-    // $('.btn-insert').on('click',() => {
-
+    // // For Testing
+    // $('.btn-delete').on('click',() => {
+    //     buildfire.publicData.search({}, postTag, function(err,records){
+    //         if(err)
+    //             alert('there was a problem retrieving your data');
+    //         else if ( records.length == 0)
+    //             alert('no records found');
+    //         else{
+    //             console.log(records)
+    //             records.forEach(record => {
+    //                 buildfire.publicData.delete(record.id, postTag, function(err, status){
+    //                     if(err)
+    //                         console.log('there was a problem deleteing your data');
+    //                     else
+    //                         console.log('Record Deleted');
+    //                 })    
+    //             })
+    //         }
+    //     });
     // })
 
-    $('.btn-delete').on('click',() => {
-        buildfire.publicData.search({}, postTag, function(err,records){  // see search below
-            if(err)
-                alert('there was a problem retrieving your data');
-            else if ( records.length == 0)
-                alert('no records found');
-            else{
-                // var rec = records[0];
-                console.log(records)
-                records.forEach(record => {
-                    buildfire.publicData.delete(record.id, postTag, function(err, status){
-                        if(err)
-                            console.log('there was a problem deleteing your data');
-                        else
-                            console.log('Record Deleted');
-                    })    
-                })
-            }
-        });
-    })
-
-    $('.btn-search').on('click',() => {
-        buildfire.publicData.search({}, postTag, (err, data) => {
-            if (err) {
-                console.log('error: ', err)
-            } else {
-                console.log(data)
-            }
-        })
-    })
+    // //For testing
+    // $('.btn-search').on('click',() => {
+    //     buildfire.publicData.search({}, postTag, (err, data) => {
+    //         if (err) {
+    //             console.log('error: ', err)
+    //         } else {
+    //             console.log(data)
+    //         }
+    //     })
+    // })
 
     $('.photo-import').on('change', (e) => {
         console.log(e.target.files[0])
@@ -91,8 +80,6 @@ $(function() {
     });
 
     $('.btn-confirm-post').on('click', () => {
-        const caption = $('.caption').val()
-        console.log($('.uploaded-img').attr('src'))
         const post = {
             user: {
                 id: user._id,
@@ -106,7 +93,7 @@ $(function() {
                 comments: []
             }
         }
-        console.log(post)
+
         $('.btn-confirm-post').text('Posting...').prop('disabled', true)
         $('.post-error-msg').addClass('d-none')
 
@@ -117,12 +104,9 @@ $(function() {
                 $('.post-error-msg').text('There was an error posting your photo').removeClass('d-none')
             } else {
                 $('.btn-confirm-post').text('Post').prop('disabled', false).addClass('d-none')
-                $('.btn-see-post').removeClass('d-none')
+                buildfire.history.pop()
+                location.href = 'index.html'
             }
         })
     })
 })
-
-const getFileNameWithoutExt = (name) => {
-    return name.split('.').slice(0, -1).join('')
-}

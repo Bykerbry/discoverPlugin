@@ -1,14 +1,15 @@
 const { DateTime : dt } = luxon
 
 function formatTime(createdOn){
+    const today = dt.local()
     const postDate = dt.fromMillis(createdOn)
     const daysSince = postDate.diffNow('days').days
 
     //if postDate today (Today 2:35 PM)
-    if (daysSince >= -1) {
+    if (postDate.startOf('day').day == today.day) {
         return postDate.toFormat("'Today' t")
     //if postDate yesterday (Yesterday 2:35PM)
-    } else if(daysSince >= -2){
+    } else if(postDate.startOf('day').day == today.day-1){
         return postDate.toFormat("'Yesterday' t")
     //if postDate within 6 days of today (Wednesday 2:35 PM)
     } else if(daysSince >= -6) {

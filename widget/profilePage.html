@@ -11,6 +11,7 @@
   <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
   <script src="assets/vendors/bootstrap.min.js"></script>
   <script src="assets/vendors/luxon.min.js"></script>
+  <script src="js/postModal.js"></script>
   <script src="js/formatTime.js"></script>
   <script src="js/displayPosts.js"></script>
   <script src="js/global.js"></script>
@@ -45,13 +46,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title"><span class="username"></span> <br> <small class="post-creation-time text-muted">Yesterday 2:55PM</small></h4>
+          <h4 class="modal-title"><span class="username"></span> <br> <small class="post-creation-time text-muted"></small></h4>
         </div>
         <div class="modal-body">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-danger btn-delete-post">Delete Post</button>
         </div>
       </div>
     </div>
@@ -63,8 +64,9 @@
       <h2 id="post-count"> &nbsp; </h2>
       <p>Posts</p>
     </div>
-    <div class="profile-picture">
+    <div class="profile-picture d-flex justify-center align-center">
       <i class="glyphicon glyphicon-user"></i>
+      <img class="d-none" src="" alt="Profile Picture">
     </div>
     <div class="like-continer text-center">
       <h2 id="like-count"> &nbsp; </h2>
@@ -83,18 +85,8 @@
         <div class="col-xs-6 pl-0" id="col-right"></div>
       </div>
     </div>
-  
   </div>
 
-  <div class="no-posts text-center pt-5 d-none">
-    <span> Looks like there are no posts yet. </span>  
-  </div>
-  <div class="" id="main-feed-container">
-    <div class="row">
-      <div class="col-xs-6 pr-0" id="col-left"></div>
-      <div class="col-xs-6 pl-0" id="col-right"></div>
-    </div>
-  </div>
   <a class="bg-primary text-light btn-add-post" href="CreatePost.html"><span class="text-light light-color-hover bg-light">+</span></a>
 </body>
 </html>

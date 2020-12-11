@@ -1,6 +1,14 @@
 .profile-picture{
     border-radius: 50%;
+    width: 25vw;
+    height: 25vw;
 }
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+}
+
 .glyphicon-user{
     font-size: 5em;
 }
