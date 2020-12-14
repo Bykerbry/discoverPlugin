@@ -1,0 +1,22 @@
+.post-header-left img {
+    height: 5rem;
+    width: 5rem;
+}
+
+.post-body img {
+    max-width: 100%;
+    max-height: 15rem;
+    overflow-y: hidden;
+}
+
+.border-default { 
+    border: 2px solid #eef0f0;
+}
+
+.btn-white {
+    background: #FFF;
+}
+
+.interactions-container i {
+    font-size: 2rem;
+}

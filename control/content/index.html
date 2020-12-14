@@ -2,8 +2,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="css/global.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <link href="../../../../styles/helper.css" rel="stylesheet">
+
     <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
+    <script src="../vendors/luxon.min.js"></script>
+    <script src="js/formatTime.js"></script>
+    <script src="js/index.js"></script>
 
 
     <!--
@@ -13,10 +19,6 @@
     3. You may include any JS framework you want with your Widget and Control folders. However, keep in mind
         to keep you plugin as light weight as possible for performance and transport reasons
   -->
-
-    <!-- You can load helper.css to use our helper classes.
-    <link href="../../../../styles/helper.css" rel="stylesheet">
-    -->
 
   <!-- JS -->
   <script src="../../../../scripts/buildfire.js"></script>
@@ -28,8 +30,14 @@
 
 </head>
 <body>
-  <div class="no-posts text-center mt-4">
+  <div class="loading-msg text-center mt-4">
+    <span>Retrieving posts...</span>
+  </div>
+  <div class="no-posts text-center mt-4 d-none">
     <span> Looks like there are no posts yet. To add one, use the emulator on the right. </span>  
+  </div>
+  <div class="posts-container">
+
   </div>
 </body>
 </html>
